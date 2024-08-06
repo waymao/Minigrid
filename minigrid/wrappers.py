@@ -329,6 +329,11 @@ class RGBImgObsWrapper(ObservationWrapper):
             highlight=self.unwrapped.highlight, tile_size=self.tile_size
         )
 
+        # Get frame returns the rendering of the grid,
+        # a numpy array of shape (height, width, 3).
+        # We transpose it to (width, height, 3) to match the observation space.
+        rgb_img = rgb_img.transpose(1, 0, 2)
+
         return {**obs, "image": rgb_img}
 
 
